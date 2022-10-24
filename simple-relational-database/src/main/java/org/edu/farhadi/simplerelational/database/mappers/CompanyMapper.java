@@ -7,17 +7,27 @@ import org.edu.farhadi.simplerelational.database.models.StationModel;
 import org.mapstruct.*;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = "spring", uses = {CompanyMapper.class},
-        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS)
+        nullValueCheckStrategy = NullValueCheckStrategy.ALWAYS, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface CompanyMapper extends BaseMapper<CompanyModel, CompanyEntity> {
 
     @Override
-    @Mappings({
-            @Mapping(target = "parent.stationList", ignore = true),
-            @Mapping(target = "stationList", qualifiedByName = "stationEntityToStationModel")
-    })
+    @Mapping(target = "stationList", qualifiedByName = "stationEntityToStationModel")
     CompanyModel toModel(final CompanyEntity entity);
+
+
+    @Override
+    @Mapping(target = "stationList", qualifiedByName = "stationModelToStationEntity")
+    CompanyEntity toEntity(final CompanyModel model);
 
     @Named("stationEntityToStationModel")
     @Mapping(target = "company", ignore = true)
     StationModel stationEntityToStationModel(StationEntity entity);
+
+
+    @Named("stationModelToStationEntity")
+    @Mapping(target = "company", ignore = true)
+    StationEntity stationModelToStationEntity(StationModel stationModel);
+
+
+
 }

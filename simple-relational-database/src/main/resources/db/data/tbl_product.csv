@@ -1,0 +1,4 @@
+id,created_by,created_date,modified_by,modified_date,version,code,title,deleted
+1,m.farhadi,2022-03-27 19:00:42.000000,m.farhadi,2022-03-27 19:00:42.000000,0,10,Face Recognition,false
+2,m.farhadi,2022-03-27 19:00:42.000000,m.farhadi,2022-03-27 19:00:42.000000,0,10,Product identification,false
+3,m.farhadi,2022-03-27 19:00:42.000000,m.farhadi,2022-03-27 19:00:42.000000,0,10,Card recognition,false

@@ -4,6 +4,8 @@ package org.edu.farhadi.simplerelational.database.entities;
  * @email farhadi.kam@gmail.com
  */
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 
@@ -14,8 +16,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 
-@Data
-@Entity
+@Getter
+@Setter
+@Entity(name = "station")
 @Table(name = "tbl_station")
 @Audited
 @Where(clause = "deleted=false")

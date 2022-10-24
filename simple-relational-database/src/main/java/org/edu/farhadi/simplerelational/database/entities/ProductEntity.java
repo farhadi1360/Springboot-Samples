@@ -8,7 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Entity
+@Entity(name = "product")
 @Table(name = "tbl_product")
 @Audited
 @Where(clause = "deleted=false")
@@ -22,6 +22,8 @@ public class ProductEntity extends BaseEntity<Long> implements LogicalDeleted{
     private int code;
     @NotNull
     private String title;
+    private String description;
+    private String owner;
     private boolean deleted;
 
 

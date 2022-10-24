@@ -6,6 +6,8 @@ package org.edu.farhadi.simplerelational.database.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.annotations.Where;
 import org.hibernate.envers.Audited;
 
@@ -14,8 +16,9 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
-@Data
-@Entity
+@Getter
+@Setter
+@Entity(name = "company")
 @Table(name = "tbl_company")
 @Audited
 @Where(clause = "deleted=false")
@@ -31,17 +34,15 @@ public class CompanyEntity extends BaseEntity<Long> implements LogicalDeleted {
     @NotNull
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_company_id")
-    private CompanyEntity parent;
+
 
     @JsonIgnore
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",cascade =CascadeType.ALL)
     private List<StationEntity> stationList;
 
     private boolean deleted;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tbl_company_product", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<ProductEntity> products;
+//    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+//    @JoinTable(name = "tbl_company_product", joinColumns = @JoinColumn(name = "company_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
+//    private Set<ProductEntity> products;
 }
